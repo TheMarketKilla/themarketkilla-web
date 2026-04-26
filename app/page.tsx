@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MarketWidgets } from "@/components/market-widgets";
 import { ResultsMarquee } from "@/components/results-marquee";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -102,7 +103,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#040406] text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(139,92,246,0.32),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(34,197,94,0.22),transparent_30%),radial-gradient(circle_at_50%_90%,rgba(139,92,246,0.2),transparent_35%)]" />
-      <main className="relative z-10 mx-auto max-w-6xl space-y-16 px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+      <main className="relative z-10 mx-auto max-w-6xl space-y-16 px-4 pb-10 pt-24 sm:px-6 sm:pt-28 lg:px-8 lg:pb-16 lg:pt-32">
         <section className="glass-panel animate-fade-up space-y-8 rounded-3xl border border-white/10 px-6 py-10 sm:px-10">
           <Badge className="border border-violet-400/40 bg-violet-500/10 text-violet-200 shadow-[0_0_24px_rgba(139,92,246,0.35)]">
             <Sparkles className="mr-2 h-4 w-4" />
@@ -126,6 +127,8 @@ export default function Home() {
             </Button>
           </div>
         </section>
+
+        <MarketWidgets />
 
         <section className="space-y-6" id="estrategias">
           <h2 className="text-3xl font-bold sm:text-4xl">Estrategias Automatizadas</h2>
