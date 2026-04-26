@@ -125,9 +125,12 @@
     @apply bg-background text-foreground;
     background: #040406;
     color: #f5f5f7;
+    font-size: 1.0625rem;
+    line-height: 1.6;
   }
   html {
     @apply font-sans;
+    font-size: 17px;
   }
 }
 

@@ -131,56 +131,56 @@ export default function Home() {
             Plataforma Premium de Trading Automatizado
           </Badge>
           <div className="space-y-5">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
               <span className="neon-gradient-text">TheMarketKilla</span>
             </h1>
-            <p className="max-w-3xl text-lg text-zinc-300 sm:text-xl">
+            <p className="max-w-3xl text-xl text-zinc-300 sm:text-2xl">
               Trading automatizado de Crypto y Forex que realmente genera ganancias.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button size="lg" className="group bg-gradient-to-r from-violet-500 to-emerald-400 px-8 text-base font-semibold text-black transition hover:shadow-[0_0_28px_rgba(74,222,128,0.45)]">
+            <Button size="lg" className="group bg-gradient-to-r from-violet-500 to-emerald-400 px-8 text-lg font-semibold text-black transition hover:shadow-[0_0_28px_rgba(74,222,128,0.45)]">
               Empezar Gratis
               <ArrowRight className="ml-2 h-5 w-5 transition group-hover:translate-x-1" />
             </Button>
-            <Button variant="outline" size="lg" className="border-white/20 bg-white/5 text-white hover:bg-white/10">
+            <Button variant="outline" size="lg" className="border-white/20 bg-white/5 text-base text-white hover:bg-white/10">
               Ver Performance Real
             </Button>
           </div>
         </section>
 
         <section className="space-y-6" id="estrategias">
-          <h2 className="text-2xl font-bold sm:text-3xl">Estrategias Automatizadas</h2>
+          <h2 className="text-3xl font-bold sm:text-4xl">Estrategias Automatizadas</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {strategies.map((strategy) => (
               <Card key={strategy.title} className="glass-panel border-white/10 bg-white/5 transition duration-300 hover:-translate-y-1 hover:border-violet-400/40">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-lg">
+                  <CardTitle className="flex items-center gap-3 text-xl">
                     <strategy.icon className="h-5 w-5 text-emerald-300" />
                     {strategy.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-sm text-zinc-300">{strategy.description}</CardContent>
+                <CardContent className="text-base text-zinc-300">{strategy.description}</CardContent>
               </Card>
             ))}
           </div>
         </section>
 
         <section className="space-y-6" id="performance">
-          <h2 className="text-2xl font-bold sm:text-3xl">Performance Real</h2>
+          <h2 className="text-3xl font-bold sm:text-4xl">Performance Real</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {metrics.map((metric) => (
               <Card key={metric.label} className="glass-panel border-emerald-500/20 bg-white/5">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm text-zinc-400">{metric.label}</CardTitle>
+                  <CardTitle className="text-base text-zinc-400">{metric.label}</CardTitle>
                 </CardHeader>
-                <CardContent className="text-3xl font-bold text-emerald-300">{metric.value}</CardContent>
+                <CardContent className="text-4xl font-bold text-emerald-300">{metric.value}</CardContent>
               </Card>
             ))}
           </div>
           <Card className="glass-panel border-violet-400/30 bg-gradient-to-br from-violet-500/10 to-emerald-400/10">
             <CardHeader>
-              <CardTitle className="text-lg">Equity Curve (Placeholder)</CardTitle>
+              <CardTitle className="text-xl">Equity Curve (Placeholder)</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="h-52 rounded-xl border border-white/10 bg-black/40 p-4">
@@ -191,48 +191,48 @@ export default function Home() {
         </section>
 
         <section className="space-y-6" id="como-funciona">
-          <h2 className="text-2xl font-bold sm:text-3xl">Como Funciona</h2>
+          <h2 className="text-3xl font-bold sm:text-4xl">Como Funciona</h2>
           <div className="grid gap-4 md:grid-cols-2">
             {steps.map((step, index) => (
               <Card key={step.title} className="glass-panel border-white/10 bg-white/5">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-lg">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-500/25 text-sm font-semibold text-violet-200">
+                  <CardTitle className="flex items-center gap-3 text-xl">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-violet-500/25 text-base font-semibold text-violet-200">
                       {index + 1}
                     </span>
                     {step.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-sm text-zinc-300">{step.description}</CardContent>
+                <CardContent className="text-base text-zinc-300">{step.description}</CardContent>
               </Card>
             ))}
           </div>
         </section>
 
         <section className="space-y-6" id="pricing">
-          <h2 className="text-2xl font-bold sm:text-3xl">Pricing</h2>
+          <h2 className="text-3xl font-bold sm:text-4xl">Pricing</h2>
           <div className="grid gap-5 lg:grid-cols-3">
             {plans.map((plan) => (
               <Card
                 key={plan.name}
-                className={`glass-panel relative border bg-white/5 ${plan.highlighted ? "border-violet-400/60 shadow-[0_0_35px_rgba(139,92,246,0.35)]" : "border-white/10"}`}
+                className={`glass-panel relative border bg-white/5 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03] hover:shadow-[0_18px_46px_rgba(139,92,246,0.3)] ${plan.highlighted ? "border-violet-400/60 shadow-[0_0_35px_rgba(139,92,246,0.35)] hover:shadow-[0_24px_52px_rgba(139,92,246,0.45)]" : "border-white/10"}`}
               >
                 {plan.highlighted && (
                   <Badge className="absolute -top-3 right-4 bg-emerald-400 text-black">Mas Popular</Badge>
                 )}
                 <CardHeader className="space-y-4">
-                  <CardTitle className="flex items-center justify-between text-2xl">
+                  <CardTitle className="flex items-center justify-between text-3xl">
                     {plan.name}
                     <plan.icon className="h-5 w-5 text-emerald-300" />
                   </CardTitle>
-                  <div className="text-4xl font-extrabold">
+                  <div className="text-5xl font-extrabold">
                     {plan.price}
-                    <span className="text-sm font-medium text-zinc-400">/mes</span>
+                    <span className="text-base font-medium text-zinc-400">/mes</span>
                   </div>
-                  <p className="text-sm text-zinc-400">{plan.description}</p>
+                  <p className="text-base text-zinc-400">{plan.description}</p>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <ul className="space-y-2 text-sm text-zinc-300">
+                  <ul className="space-y-2 text-base text-zinc-300">
                     {plan.features.map((feature) => (
                       <li key={feature} className="flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-emerald-300" />
@@ -240,7 +240,7 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full bg-white/10 text-white hover:bg-white/20">
+                  <Button className="w-full bg-white/10 text-base text-white hover:bg-white/20">
                     Elegir {plan.name}
                   </Button>
                 </CardContent>
@@ -250,7 +250,7 @@ export default function Home() {
         </section>
 
         <section className="space-y-6" id="testimonios">
-          <h2 className="text-2xl font-bold sm:text-3xl">Resultados Verificados</h2>
+          <h2 className="text-3xl font-bold sm:text-4xl">Resultados Verificados</h2>
           <div className="grid gap-4 lg:grid-cols-3">
             {testimonials.map((testimonial) => (
               <Card key={testimonial.name} className="glass-panel border-white/10 bg-white/5">
@@ -267,10 +267,10 @@ export default function Home() {
                     </Avatar>
                     <div>
                       <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-xs text-zinc-400">{testimonial.role}</p>
+                      <p className="text-sm text-zinc-400">{testimonial.role}</p>
                     </div>
                   </div>
-                  <p className="text-sm text-zinc-300">&quot;{testimonial.quote}&quot;</p>
+                  <p className="text-base text-zinc-300">&quot;{testimonial.quote}&quot;</p>
                   <Badge variant="outline" className="border-emerald-400/40 bg-emerald-400/10 text-emerald-200">
                     <CircleDollarSign className="mr-1 h-3.5 w-3.5" />
                     {testimonial.pnl}
