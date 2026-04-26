@@ -1,102 +1,303 @@
-import Image from "next/image";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import {
+  ArrowRight,
+  Bot,
+  CandlestickChart,
+  CheckCircle2,
+  CircleDollarSign,
+  Crown,
+  Gem,
+  ShieldCheck,
+  Sparkles,
+  TrendingUp,
+  Wallet,
+  Zap,
+} from "lucide-react";
+
+const strategies = [
+  {
+    icon: Bot,
+    title: "Scalping de Alta Frecuencia",
+    description: "Ejecucion algoritmica en marcos de 1m a 5m para capturar micro-movimientos con slippage controlado.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Momentum Multi-Timeframe",
+    description: "Confirma tendencias en H1 y H4 antes de entrar para filtrar ruido y aumentar la consistencia.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Mean Reversion Protegida",
+    description: "Detecta sobreextensiones y usa cobertura dinamica para limitar exposicion durante eventos volatiles.",
+  },
+  {
+    icon: CandlestickChart,
+    title: "Breakout de Sesiones",
+    description: "Opera rupturas en aperturas de Londres y NY con reglas claras de volumen y confirmacion.",
+  },
+  {
+    icon: Zap,
+    title: "Arbitraje de Correlacion",
+    description: "Aprovecha divergencias temporales entre pares correlacionados de Crypto y Forex.",
+  },
+];
+
+const metrics = [
+  { label: "Winrate", value: "73.4%" },
+  { label: "Profit Factor", value: "2.41" },
+  { label: "Max Drawdown", value: "8.7%" },
+  { label: "Trades Mensuales", value: "320+" },
+];
+
+const steps = [
+  {
+    title: "Conecta tu exchange o broker",
+    description: "Integracion segura por API con permisos de trading sin retiros.",
+  },
+  {
+    title: "Activa estrategias en 1 clic",
+    description: "Selecciona perfiles de riesgo y mercados desde un panel intuitivo.",
+  },
+  {
+    title: "El bot ejecuta 24/7",
+    description: "Motor automatizado con reglas de entrada, salida y gestion de capital.",
+  },
+  {
+    title: "Monitorea resultados en tiempo real",
+    description: "Dashboard con metricas clave, historico y alertas instantaneas.",
+  },
+];
+
+const plans = [
+  {
+    name: "Free",
+    price: "$0",
+    description: "Ideal para empezar",
+    icon: Wallet,
+    features: ["1 estrategia activa", "Soporte comunitario", "Metricas basicas", "Paper trading"],
+    highlighted: false,
+  },
+  {
+    name: "Pro",
+    price: "$79",
+    description: "Para traders serios",
+    icon: Gem,
+    features: ["5 estrategias activas", "Crypto + Forex", "Analytics avanzado", "Alertas premium"],
+    highlighted: true,
+  },
+  {
+    name: "VIP",
+    price: "$199",
+    description: "Maximo rendimiento",
+    icon: Crown,
+    features: ["Estrategias ilimitadas", "Senales institucionales", "Risk manager IA", "Soporte prioritario 1:1"],
+    highlighted: false,
+  },
+];
+
+const testimonials = [
+  {
+    name: "Alejandro M.",
+    role: "Trader Crypto",
+    quote: "Pase de operar emocionalmente a tener una curva de equity estable. El cambio fue brutal.",
+    pnl: "+18.2% mensual",
+  },
+  {
+    name: "Valentina R.",
+    role: "Forex Swing Trader",
+    quote: "La automatizacion me devolvio tiempo y mejoro mi disciplina. Drawdown mucho mas controlado.",
+    pnl: "+12.9% mensual",
+  },
+  {
+    name: "Daniel P.",
+    role: "Prop Firm Candidate",
+    quote: "Con TheMarketKilla consegui consistencia real y supere mis evaluaciones de fondeo.",
+    pnl: "Profit factor 2.3",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="relative min-h-screen overflow-hidden bg-[#040406] text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(139,92,246,0.32),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(34,197,94,0.22),transparent_30%),radial-gradient(circle_at_50%_90%,rgba(139,92,246,0.2),transparent_35%)]" />
+      <main className="relative z-10 mx-auto max-w-6xl space-y-16 px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+        <section className="glass-panel animate-fade-up space-y-8 rounded-3xl border border-white/10 px-6 py-10 sm:px-10">
+          <Badge className="border border-violet-400/40 bg-violet-500/10 text-violet-200 shadow-[0_0_24px_rgba(139,92,246,0.35)]">
+            <Sparkles className="mr-2 h-4 w-4" />
+            Plataforma Premium de Trading Automatizado
+          </Badge>
+          <div className="space-y-5">
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              <span className="neon-gradient-text">TheMarketKilla</span>
+            </h1>
+            <p className="max-w-3xl text-lg text-zinc-300 sm:text-xl">
+              Trading automatizado de Crypto y Forex que realmente genera ganancias.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button size="lg" className="group bg-gradient-to-r from-violet-500 to-emerald-400 px-8 text-base font-semibold text-black transition hover:shadow-[0_0_28px_rgba(74,222,128,0.45)]">
+              Empezar Gratis
+              <ArrowRight className="ml-2 h-5 w-5 transition group-hover:translate-x-1" />
+            </Button>
+            <Button variant="outline" size="lg" className="border-white/20 bg-white/5 text-white hover:bg-white/10">
+              Ver Performance Real
+            </Button>
+          </div>
+        </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+        <section className="space-y-6" id="estrategias">
+          <h2 className="text-2xl font-bold sm:text-3xl">Estrategias Automatizadas</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {strategies.map((strategy) => (
+              <Card key={strategy.title} className="glass-panel border-white/10 bg-white/5 transition duration-300 hover:-translate-y-1 hover:border-violet-400/40">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3 text-lg">
+                    <strategy.icon className="h-5 w-5 text-emerald-300" />
+                    {strategy.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-zinc-300">{strategy.description}</CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-6" id="performance">
+          <h2 className="text-2xl font-bold sm:text-3xl">Performance Real</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {metrics.map((metric) => (
+              <Card key={metric.label} className="glass-panel border-emerald-500/20 bg-white/5">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm text-zinc-400">{metric.label}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-3xl font-bold text-emerald-300">{metric.value}</CardContent>
+              </Card>
+            ))}
+          </div>
+          <Card className="glass-panel border-violet-400/30 bg-gradient-to-br from-violet-500/10 to-emerald-400/10">
+            <CardHeader>
+              <CardTitle className="text-lg">Equity Curve (Placeholder)</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-52 rounded-xl border border-white/10 bg-black/40 p-4">
+                <div className="h-full w-full rounded-lg bg-[linear-gradient(110deg,rgba(16,185,129,0.1)_0%,rgba(139,92,246,0.2)_40%,rgba(16,185,129,0.1)_100%)]" />
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="space-y-6" id="como-funciona">
+          <h2 className="text-2xl font-bold sm:text-3xl">Como Funciona</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            {steps.map((step, index) => (
+              <Card key={step.title} className="glass-panel border-white/10 bg-white/5">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3 text-lg">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-500/25 text-sm font-semibold text-violet-200">
+                      {index + 1}
+                    </span>
+                    {step.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-zinc-300">{step.description}</CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-6" id="pricing">
+          <h2 className="text-2xl font-bold sm:text-3xl">Pricing</h2>
+          <div className="grid gap-5 lg:grid-cols-3">
+            {plans.map((plan) => (
+              <Card
+                key={plan.name}
+                className={`glass-panel relative border bg-white/5 ${plan.highlighted ? "border-violet-400/60 shadow-[0_0_35px_rgba(139,92,246,0.35)]" : "border-white/10"}`}
+              >
+                {plan.highlighted && (
+                  <Badge className="absolute -top-3 right-4 bg-emerald-400 text-black">Mas Popular</Badge>
+                )}
+                <CardHeader className="space-y-4">
+                  <CardTitle className="flex items-center justify-between text-2xl">
+                    {plan.name}
+                    <plan.icon className="h-5 w-5 text-emerald-300" />
+                  </CardTitle>
+                  <div className="text-4xl font-extrabold">
+                    {plan.price}
+                    <span className="text-sm font-medium text-zinc-400">/mes</span>
+                  </div>
+                  <p className="text-sm text-zinc-400">{plan.description}</p>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <ul className="space-y-2 text-sm text-zinc-300">
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-300" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="w-full bg-white/10 text-white hover:bg-white/20">
+                    Elegir {plan.name}
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-6" id="testimonios">
+          <h2 className="text-2xl font-bold sm:text-3xl">Resultados Verificados</h2>
+          <div className="grid gap-4 lg:grid-cols-3">
+            {testimonials.map((testimonial) => (
+              <Card key={testimonial.name} className="glass-panel border-white/10 bg-white/5">
+                <CardContent className="space-y-4 pt-6">
+                  <div className="flex items-center gap-3">
+                    <Avatar>
+                      <AvatarFallback className="bg-violet-500/30 text-violet-100">
+                        {testimonial.name
+                          .split(" ")
+                          .map((chunk) => chunk[0])
+                          .join("")
+                          .slice(0, 2)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="font-semibold">{testimonial.name}</p>
+                      <p className="text-xs text-zinc-400">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-zinc-300">&quot;{testimonial.quote}&quot;</p>
+                  <Badge variant="outline" className="border-emerald-400/40 bg-emerald-400/10 text-emerald-200">
+                    <CircleDollarSign className="mr-1 h-3.5 w-3.5" />
+                    {testimonial.pnl}
+                  </Badge>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="relative z-10 mx-auto max-w-6xl px-4 pb-10 sm:px-6 lg:px-8">
+        <Separator className="bg-white/10" />
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 text-sm text-zinc-400 sm:flex-row">
+          <p>(c) {new Date().getFullYear()} TheMarketKilla. Todos los derechos reservados.</p>
+          <div className="flex items-center gap-4">
+            <a className="transition hover:text-violet-300" href="https://t.me" target="_blank" rel="noreferrer">
+              Telegram
+            </a>
+            <a className="transition hover:text-violet-300" href="https://x.com" target="_blank" rel="noreferrer">
+              X
+            </a>
+            <a className="transition hover:text-violet-300" href="https://discord.com" target="_blank" rel="noreferrer">
+              Discord
+            </a>
+          </div>
+        </div>
       </footer>
     </div>
   );
