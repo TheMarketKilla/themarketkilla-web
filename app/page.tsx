@@ -128,6 +128,8 @@ export default function Home() {
           </div>
         </section>
 
+        <ResultsMarquee />
+
         <MarketWidgets />
 
         <section className="space-y-6" id="estrategias">
@@ -229,8 +231,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-
-        <ResultsMarquee />
 
       </main>
 
