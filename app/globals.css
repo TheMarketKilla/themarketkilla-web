@@ -145,6 +145,15 @@
   }
 }
 
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 0.625rem));
+  }
+}
+
 @layer utilities {
   .glass-panel {
     backdrop-filter: blur(18px);
@@ -163,5 +172,31 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+  .marquee-track {
+    animation: marquee-left 62s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-fade:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .marquee-fade {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 1) 8%,
+      rgba(0, 0, 0, 1) 92%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 1) 8%,
+      rgba(0, 0, 0, 1) 92%,
+      transparent 100%
+    );
   }
 }

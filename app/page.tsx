@@ -1,14 +1,13 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ResultsMarquee } from "@/components/results-marquee";
 import { Separator } from "@/components/ui/separator";
 import {
   ArrowRight,
   Bot,
   CandlestickChart,
   CheckCircle2,
-  CircleDollarSign,
   Crown,
   Gem,
   ShieldCheck,
@@ -99,27 +98,6 @@ const plans = [
   },
 ];
 
-const testimonials = [
-  {
-    name: "Alejandro M.",
-    role: "Trader Crypto",
-    quote: "Pase de operar emocionalmente a tener una curva de equity estable. El cambio fue brutal.",
-    pnl: "+18.2% mensual",
-  },
-  {
-    name: "Valentina R.",
-    role: "Forex Swing Trader",
-    quote: "La automatizacion me devolvio tiempo y mejoro mi disciplina. Drawdown mucho mas controlado.",
-    pnl: "+12.9% mensual",
-  },
-  {
-    name: "Daniel P.",
-    role: "Prop Firm Candidate",
-    quote: "Con TheMarketKilla consegui consistencia real y supere mis evaluaciones de fondeo.",
-    pnl: "Profit factor 2.3",
-  },
-];
-
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#040406] text-white">
@@ -190,6 +168,8 @@ export default function Home() {
           </Card>
         </section>
 
+        <ResultsMarquee />
+
         <section className="space-y-6" id="como-funciona">
           <h2 className="text-3xl font-bold sm:text-4xl">Como Funciona</h2>
           <div className="grid gap-4 md:grid-cols-2">
@@ -249,37 +229,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="space-y-6" id="testimonios">
-          <h2 className="text-3xl font-bold sm:text-4xl">Resultados Verificados</h2>
-          <div className="grid gap-4 lg:grid-cols-3">
-            {testimonials.map((testimonial) => (
-              <Card key={testimonial.name} className="glass-panel border-white/10 bg-white/5">
-                <CardContent className="space-y-4 pt-6">
-                  <div className="flex items-center gap-3">
-                    <Avatar>
-                      <AvatarFallback className="bg-violet-500/30 text-violet-100">
-                        {testimonial.name
-                          .split(" ")
-                          .map((chunk) => chunk[0])
-                          .join("")
-                          .slice(0, 2)}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-zinc-400">{testimonial.role}</p>
-                    </div>
-                  </div>
-                  <p className="text-base text-zinc-300">&quot;{testimonial.quote}&quot;</p>
-                  <Badge variant="outline" className="border-emerald-400/40 bg-emerald-400/10 text-emerald-200">
-                    <CircleDollarSign className="mr-1 h-3.5 w-3.5" />
-                    {testimonial.pnl}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
       </main>
 
       <footer className="relative z-10 mx-auto max-w-6xl px-4 pb-10 sm:px-6 lg:px-8">
