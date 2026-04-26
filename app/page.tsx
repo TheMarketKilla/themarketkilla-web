@@ -171,8 +171,6 @@ export default function Home() {
           </Card>
         </section>
 
-        <ResultsMarquee />
-
         <section className="space-y-6" id="como-funciona">
           <h2 className="text-3xl font-bold sm:text-4xl">Como Funciona</h2>
           <div className="grid gap-4 md:grid-cols-2">
@@ -231,6 +229,8 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        <ResultsMarquee />
 
       </main>
 
