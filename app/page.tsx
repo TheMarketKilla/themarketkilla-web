@@ -104,34 +104,25 @@ export default function Home() {
     <div className="relative min-h-screen overflow-hidden bg-[#040406] text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(139,92,246,0.32),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(34,197,94,0.22),transparent_30%),radial-gradient(circle_at_50%_90%,rgba(139,92,246,0.2),transparent_35%)]" />
       <main className="relative z-10 mx-auto max-w-6xl space-y-16 px-4 pb-10 pt-24 sm:px-6 sm:pt-28 lg:px-8 lg:pb-16 lg:pt-32">
-        <section className="glass-panel animate-fade-up space-y-10 rounded-3xl border border-white/10 px-6 py-14 sm:px-12 lg:px-16 lg:py-20">
-          <Badge className="border border-violet-400/40 bg-violet-500/10 text-violet-200 shadow-[0_0_24px_rgba(139,92,246,0.35)] px-4 py-1.5 text-sm sm:text-base">
+        <section className="glass-panel animate-fade-up space-y-8 rounded-3xl border border-white/10 px-6 py-10 sm:px-10">
+          <Badge className="border border-violet-400/40 bg-violet-500/10 text-violet-200 shadow-[0_0_24px_rgba(139,92,246,0.35)]">
             <Sparkles className="mr-2 h-4 w-4" />
             Plataforma Premium de Trading Automatizado
           </Badge>
-          <div className="space-y-6">
-            <h1 className="text-6xl font-black tracking-tighter sm:text-7xl lg:text-8xl xl:text-9xl leading-[0.9]">
-              <span className="neon-gradient-text-hero">TheMarketKilla</span>
+          <div className="space-y-5">
+            <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+              <span className="neon-gradient-text">TheMarketKilla</span>
             </h1>
-            <p className="max-w-4xl text-xl text-zinc-300 sm:text-2xl lg:text-3xl text-glow-subtitle leading-relaxed">
-              Trading automatizado de <span className="text-violet-300 font-semibold">Crypto</span> y <span className="text-emerald-300 font-semibold">Forex</span> que realmente genera ganancias.
-              <br className="hidden sm:block" />
-              <span className="text-zinc-400 text-base sm:text-lg lg:text-xl">Ejecución algorítmica 24/7 con inteligencia artificial.</span>
+            <p className="max-w-3xl text-xl text-zinc-300 sm:text-2xl">
+              Trading automatizado de Crypto y Forex que realmente genera ganancias.
             </p>
           </div>
-          <div className="flex flex-col gap-4 sm:flex-row sm:gap-5">
-            <Button
-              size="lg"
-              className="btn-cta-glow group h-14 cursor-pointer rounded-xl bg-gradient-to-r from-violet-500 to-emerald-400 px-10 text-lg font-bold text-black shadow-lg shadow-violet-500/25 hover:shadow-xl"
-            >
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button size="lg" className="group bg-gradient-to-r from-violet-500 to-emerald-400 px-8 text-lg font-semibold text-black transition hover:shadow-[0_0_28px_rgba(74,222,128,0.45)]">
               Empezar Gratis
-              <ArrowRight className="ml-2 h-5 w-5 transition duration-300 group-hover:translate-x-1.5" />
+              <ArrowRight className="ml-2 h-5 w-5 transition group-hover:translate-x-1" />
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="btn-cta-outline-glow h-14 cursor-pointer rounded-xl border-white/20 bg-white/5 px-10 text-lg font-semibold text-white hover:bg-white/10"
-            >
+            <Button variant="outline" size="lg" className="border-white/20 bg-white/5 text-base text-white hover:bg-white/10">
               Ver Performance Real
             </Button>
           </div>

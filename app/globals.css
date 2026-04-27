@@ -174,36 +174,6 @@
     color: transparent;
   }
 
-  .neon-gradient-text-hero {
-    background: linear-gradient(135deg, #c084fc 0%, #a855f7 30%, #4ade80 70%, #22c55e 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.35)) drop-shadow(0 0 60px rgba(74, 222, 128, 0.15));
-  }
-
-  .text-glow-subtitle {
-    text-shadow: 0 0 40px rgba(139, 92, 246, 0.12), 0 0 80px rgba(74, 222, 128, 0.06);
-  }
-
-  .btn-cta-glow {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .btn-cta-glow:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(74, 222, 128, 0.5), 0 0 60px rgba(74, 222, 128, 0.2);
-  }
-
-  .btn-cta-outline-glow {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .btn-cta-outline-glow:hover {
-    transform: scale(1.05);
-    border-color: rgba(139, 92, 246, 0.6);
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.35), inset 0 0 30px rgba(139, 92, 246, 0.05);
-    background: rgba(139, 92, 246, 0.15);
-  }
-
   .marquee-track {
     animation: marquee-left 62s linear infinite;
     will-change: transform;
