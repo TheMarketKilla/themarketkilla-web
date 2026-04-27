@@ -156,42 +156,44 @@ export function MarketWidgets() {
           <Badge className="border border-violet-400/40 bg-violet-500/10 text-violet-200">Live cada 20s</Badge>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {snapshotCards.map((asset) => {
-            const isPositive = asset.change >= 0;
+        <div className="marquee-fade relative overflow-hidden rounded-2xl py-4">
+          <div className="marquee-track flex w-max gap-4 sm:gap-5">
+            {[...snapshotCards, ...snapshotCards].map((asset, index) => {
+              const isPositive = asset.change >= 0;
 
-            return (
-              <Card key={asset.id} className="glass-panel border-white/10 bg-white/5">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center justify-between text-xl">
-                    <span>{asset.symbol}</span>
-                    <span className="text-sm font-medium text-zinc-400">{asset.label}</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="text-2xl font-extrabold text-zinc-100">
-                    {assets?.[asset.id] ? formatPrice(asset.price, asset.id === "ripple") : "--"}
-                  </div>
-                  <div className={`text-sm font-semibold ${isPositive ? "text-emerald-300" : "text-red-300"}`}>
-                    {formatChange(asset.change)} (24h)
-                  </div>
-                  <div className="h-20 w-full">
-                    <Line
-                      data={asset.chartData}
-                      options={{
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: false,
-                        plugins: { legend: { display: false }, tooltip: { enabled: false } },
-                        scales: { x: { display: false }, y: { display: false } },
-                        elements: { line: { capBezierPoints: true } },
-                      }}
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
+              return (
+                <Card key={`${asset.id}-${index}`} className="glass-panel min-w-[260px] border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:border-violet-400/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.25)] sm:min-w-[280px]">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center justify-between text-xl">
+                      <span>{asset.symbol}</span>
+                      <span className="text-sm font-medium text-zinc-400">{asset.label}</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="text-2xl font-extrabold text-zinc-100">
+                      {assets?.[asset.id] ? formatPrice(asset.price, asset.id === "ripple") : "--"}
+                    </div>
+                    <div className={`text-sm font-semibold ${isPositive ? "text-emerald-300" : "text-red-300"}`}>
+                      {formatChange(asset.change)} (24h)
+                    </div>
+                    <div className="h-20 w-full">
+                      <Line
+                        data={asset.chartData}
+                        options={{
+                          responsive: true,
+                          maintainAspectRatio: false,
+                          animation: false,
+                          plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                          scales: { x: { display: false }, y: { display: false } },
+                          elements: { line: { capBezierPoints: true } },
+                        }}
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
         </div>
       </section>
     </>
