@@ -11,7 +11,6 @@ import { EquityChart } from "@/components/equity-chart";
 import { ParticlesBackground } from "@/components/particles-background";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
-import { useCountUp } from "@/hooks/useCountUp";
 import {
   ArrowRight,
   Bot,
