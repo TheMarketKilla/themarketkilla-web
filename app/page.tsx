@@ -9,6 +9,7 @@ import { MarketWidgets } from "@/components/market-widgets";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { EquityChart } from "@/components/equity-chart";
 import { ParticlesBackground } from "@/components/particles-background";
+import { AnimatedTitle } from "@/components/animated-title";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -296,9 +297,7 @@ export default function Home() {
             Plataforma Premium de Trading Automatizado
           </Badge>
           <div className="space-y-5">
-            <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-              <span className="hero-gradient-text">TheMarketKilla</span>
-            </h1>
+            <AnimatedTitle text="TheMarketKilla" className="text-5xl font-extrabold tracking-tight hero-gradient-text sm:text-6xl lg:text-7xl" />
             <p className="max-w-3xl text-xl text-zinc-300 sm:text-2xl">
               Trading automatizado de Crypto y Forex que realmente genera ganancias.
             </p>
