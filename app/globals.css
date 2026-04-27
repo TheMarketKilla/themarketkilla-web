@@ -249,3 +249,23 @@
     100% { background-position: 200% center; }
   }
 }
+
+/* ── Terminal blinking cursor for AnimatedTitle ── */
+.terminal-cursor {
+  display: inline-block !important;
+  width: 3px;
+  height: 0.9em;
+  background-color: #3B82F6 !important;
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+  flex-shrink: 0;
+  /* Override any inherited background-clip that would hide the color */
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
