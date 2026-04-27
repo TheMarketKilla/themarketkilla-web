@@ -13,6 +13,8 @@ import {
   PointElement,
   Tooltip,
 } from "chart.js";
+import { Maximize2 } from "lucide-react";
+import { ChartModal } from "@/components/chart-modal";
 
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Filler);
 
@@ -42,7 +44,7 @@ const ASSETS: AssetConfig[] = [
   { id: "XAUTUSDT", symbol: "XAU/USD", label: "Oro (PAXG)", displayDecimals: 2 },
 ];
 
-const SPARKLINE_POINTS = 48; // ~4h de velas de 5 min para el mini-gráfico
+const SPARKLINE_POINTS = 48;
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -65,7 +67,6 @@ function formatChange(change: number | null) {
 
 const BINANCE_REST = "https://api.binance.com";
 
-/** Fetch current prices — one call per symbol (avoids URL encoding issues) */
 async function fetchInitialPrices(): Promise<Record<AssetKey, number>> {
   const entries = await Promise.all(
     ASSETS.map(async (asset) => {
@@ -88,7 +89,6 @@ async function fetchInitialPrices(): Promise<Record<AssetKey, number>> {
   return map as Record<AssetKey, number>;
 }
 
-/** Fetch 24h price change percent — one call per symbol (endpoint doesn't support multi) */
 async function fetch24hChanges(): Promise<Record<AssetKey, number>> {
   const entries = await Promise.all(
     ASSETS.map(async (asset) => {
@@ -111,7 +111,6 @@ async function fetch24hChanges(): Promise<Record<AssetKey, number>> {
   return map as Record<AssetKey, number>;
 }
 
-/** Fetch sparkline from 5m klines (last ~4h) */
 async function fetchSparkline(symbol: AssetKey): Promise<number[]> {
   try {
     const res = await fetch(
@@ -120,14 +119,14 @@ async function fetchSparkline(symbol: AssetKey): Promise<number[]> {
     );
     if (!res.ok) return [];
     const data: [number, string, string, string, string][] = await res.json();
-    return data.map((k) => Number.parseFloat(k[4])); // close price
+    return data.map((k) => Number.parseFloat(k[4]));
   } catch {
     return [];
   }
 }
 
 // ---------------------------------------------------------------------------
-// WebSocket hook — real-time trades
+// WebSocket hook
 // ---------------------------------------------------------------------------
 
 function useBinanceWebSocket(onMessage: (symbol: AssetKey, price: number) => void) {
@@ -155,7 +154,7 @@ function useBinanceWebSocket(onMessage: (symbol: AssetKey, price: number) => voi
           }
         }
       } catch {
-        // ignore malformed frames
+        // ignore
       }
     };
 
@@ -180,8 +179,8 @@ function useBinanceWebSocket(onMessage: (symbol: AssetKey, price: number) => voi
 export function MarketWidgets() {
   const [assets, setAssets] = useState<Record<AssetKey, AssetData> | null>(null);
   const [lastUpdated, setLastUpdated] = useState<string>("");
+  const [selectedAsset, setSelectedAsset] = useState<AssetConfig | null>(null);
 
-  // Initial fetch: prices + 24h change + sparklines
   useEffect(() => {
     let mounted = true;
 
@@ -224,8 +223,6 @@ export function MarketWidgets() {
     };
 
     load();
-
-    // Refresh 24h change + sparklines every 60s (prices come via WS)
     const interval = setInterval(load, 60_000);
 
     return () => {
@@ -234,7 +231,6 @@ export function MarketWidgets() {
     };
   }, []);
 
-  // WebSocket for real-time price updates
   const handleWsMessage = useCallback((symbol: AssetKey, price: number) => {
     setAssets((prev) => {
       if (!prev?.[symbol]) return prev;
@@ -250,7 +246,6 @@ export function MarketWidgets() {
 
   useBinanceWebSocket(handleWsMessage);
 
-  // Build cards
   const snapshotCards = useMemo(() => {
     return ASSETS.map((asset) => {
       const live = assets?.[asset.id];
@@ -281,6 +276,10 @@ export function MarketWidgets() {
       };
     });
   }, [assets]);
+
+  const handleCloseModal = useCallback(() => {
+    setSelectedAsset(null);
+  }, []);
 
   return (
     <>
@@ -327,12 +326,16 @@ export function MarketWidgets() {
               return (
                 <Card
                   key={`${asset.id}-${index}`}
-                  className="glass-panel min-w-[260px] border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:border-violet-400/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.25)] sm:min-w-[280px]"
+                  onClick={() => setSelectedAsset(asset)}
+                  className="glass-panel min-w-[260px] cursor-pointer border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:border-violet-400/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.25)] sm:min-w-[280px] group"
                 >
                   <CardHeader className="pb-3">
                     <CardTitle className="flex items-center justify-between text-xl">
                       <span>{asset.symbol}</span>
-                      <span className="text-sm font-medium text-zinc-400">{asset.label}</span>
+                      <span className="flex items-center gap-2">
+                        <span className="text-sm font-medium text-zinc-400">{asset.label}</span>
+                        <Maximize2 className="h-3.5 w-3.5 text-zinc-500 opacity-0 transition group-hover:opacity-100" />
+                      </span>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
@@ -366,6 +369,17 @@ export function MarketWidgets() {
           </div>
         </div>
       </section>
+
+      {/* ── Interactive Chart Modal ── */}
+      {selectedAsset && (
+        <ChartModal
+          symbol={selectedAsset.id}
+          label={selectedAsset.label}
+          displayDecimals={selectedAsset.displayDecimals}
+          currentPrice={assets?.[selectedAsset.id]?.price ?? 0}
+          onClose={handleCloseModal}
+        />
+      )}
     </>
   );
 }
