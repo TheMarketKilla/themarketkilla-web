@@ -297,7 +297,7 @@ export default function Home() {
           </Badge>
           <div className="space-y-5">
             <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-              <span className="neon-gradient-text">TheMarketKilla</span>
+              <span className="hero-gradient-text">TheMarketKilla</span>
             </h1>
             <p className="max-w-3xl text-xl text-zinc-300 sm:text-2xl">
               Trading automatizado de Crypto y Forex que realmente genera ganancias.

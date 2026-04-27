@@ -233,4 +233,19 @@
   .glow-on-complete {
     animation: pulse-glow 0.6s ease-out;
   }
+
+  /* ── Hero gradient: azul → cian → azul, lento y constante ── */
+  .hero-gradient-text {
+    background: linear-gradient(270deg, #8B5CF6, #22C55E, #8B5CF6);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 6s ease infinite;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
 }
