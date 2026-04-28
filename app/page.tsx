@@ -12,6 +12,7 @@ import { ParticlesBackground } from "@/components/particles-background";
 import { AnimatedTitle } from "@/components/animated-title";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
+import { CardGroup, CardItem } from "@/components/card-group";
 import {
   ArrowRight,
   Bot,
@@ -315,7 +316,7 @@ export default function Home() {
 
         <MarketWidgets />
 
-        {/* ── Estrategias Section with hover animations ── */}
+        {/* ── Estrategias Section with hover animations + fan effect ── */}
         <section className="space-y-6" id="estrategias">
           <motion.h2
             className="text-3xl font-bold sm:text-4xl"
@@ -326,52 +327,54 @@ export default function Home() {
           >
             Estrategias Automatizadas
           </motion.h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {strategies.map((strategy) => (
-              <motion.div
-                key={strategy.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.5, ease: EASE }}
-                className="group relative"
-              >
-                {/* Gradient border pseudo-element */}
-                <div
-                  className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(59,130,246,0.4), rgba(139,92,246,0.4))",
-                    padding: "1px",
-                    WebkitMask:
-                      "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    WebkitMaskComposite: "xor",
-                    maskComposite: "exclude",
-                    borderRadius: "inherit",
-                  }}
-                />
-                <Card
-                  className={`glass-panel relative border bg-white/5 transition-all duration-300
-                    group-hover:[-webkit-transform:translateY(-4px)_scale(1.02)]
-                    group-hover:[transform:translateY(-4px)_scale(1.02)]
-                    group-hover:shadow-[0_12px_40px_rgba(59,130,246,0.15)]
-                    border-white/10`}
-                  style={{
-                    transition:
-                      "transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1)",
-                  }}
-                >
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3 text-xl">
-                      <strategy.icon className="h-5 w-5 text-emerald-300" />
-                      {strategy.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-base text-zinc-300">{strategy.description}</CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+          <CardGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {strategies.map((strategy, index) => {
+              // Distribuir posiciones para dar efecto abanico: left, left, center, right, right
+              const positions: ("left" | "center" | "right")[] = [
+                "left", "left", "center", "right", "right",
+              ];
+
+              return (
+                <CardItem key={strategy.title} position={positions[index]}>
+                  <div className="group relative">
+                    {/* Gradient border pseudo-element */}
+                    <div
+                      className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(59,130,246,0.4), rgba(139,92,246,0.4))",
+                        padding: "1px",
+                        WebkitMask:
+                          "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                        WebkitMaskComposite: "xor",
+                        maskComposite: "exclude",
+                        borderRadius: "inherit",
+                      }}
+                    />
+                    <Card
+                      className={`glass-panel relative border bg-white/5 transition-all duration-300
+                        group-hover:[-webkit-transform:translateY(-4px)_scale(1.02)]
+                        group-hover:[transform:translateY(-4px)_scale(1.02)]
+                        group-hover:shadow-[0_12px_40px_rgba(59,130,246,0.15)]
+                        border-white/10`}
+                      style={{
+                        transition:
+                          "transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1)",
+                      }}
+                    >
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-3 text-xl">
+                          <strategy.icon className="h-5 w-5 text-emerald-300" />
+                          {strategy.title}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="text-base text-zinc-300">{strategy.description}</CardContent>
+                    </Card>
+                  </div>
+                </CardItem>
+              );
+            })}
+          </CardGroup>
         </section>
 
         {/* ── Performance Section ── */}

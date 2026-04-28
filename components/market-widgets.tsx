@@ -15,6 +15,7 @@ import {
 } from "chart.js";
 import { Maximize2 } from "lucide-react";
 import { ChartModal } from "@/components/chart-modal";
+import { CardGroup, CardItem } from "@/components/card-group";
 
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Filler);
 
@@ -318,56 +319,59 @@ export function MarketWidgets() {
           </Badge>
         </div>
 
-        <div className="marquee-fade relative overflow-hidden rounded-2xl py-4">
+        <CardGroup className="marquee-fade relative overflow-hidden rounded-2xl py-4">
           <div className="marquee-track flex w-max gap-4 sm:gap-5">
             {[...snapshotCards, ...snapshotCards].map((asset, index) => {
               const isPositive = asset.change >= 0;
+              // Distribuir posiciones para efecto abanico (solo en el primer set)
+              const positions: ("left" | "center" | "right")[] = ["left", "left", "right", "right"];
 
               return (
-                <Card
-                  key={`${asset.id}-${index}`}
-                  onClick={() => setSelectedAsset(asset)}
-                  className="glass-panel min-w-[260px] cursor-pointer border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:border-violet-400/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.25)] sm:min-w-[280px] group"
-                >
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center justify-between text-xl">
-                      <span>{asset.symbol}</span>
-                      <span className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-zinc-400">{asset.label}</span>
-                        <Maximize2 className="h-3.5 w-3.5 text-zinc-500 opacity-0 transition group-hover:opacity-100" />
-                      </span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <div className="text-2xl font-extrabold text-zinc-100">
-                      {assets?.[asset.id]
-                        ? formatPrice(asset.price, asset.displayDecimals)
-                        : "--"}
-                    </div>
-                    <div
-                      className={`text-sm font-semibold ${isPositive ? "text-emerald-300" : "text-red-300"}`}
-                    >
-                      {formatChange(asset.change)} (24h)
-                    </div>
-                    <div className="h-20 w-full">
-                      <Line
-                        data={asset.chartData}
-                        options={{
-                          responsive: true,
-                          maintainAspectRatio: false,
-                          animation: false,
-                          plugins: { legend: { display: false }, tooltip: { enabled: false } },
-                          scales: { x: { display: false }, y: { display: false } },
-                          elements: { line: { capBezierPoints: true } },
-                        }}
-                      />
-                    </div>
-                  </CardContent>
-                </Card>
+                <CardItem key={`${asset.id}-${index}`} position={positions[index % 4]}>
+                  <Card
+                    onClick={() => setSelectedAsset(asset)}
+                    className="glass-panel min-w-[260px] cursor-pointer border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:border-violet-400/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.25)] sm:min-w-[280px] group"
+                  >
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center justify-between text-xl">
+                        <span>{asset.symbol}</span>
+                        <span className="flex items-center gap-2">
+                          <span className="text-sm font-medium text-zinc-400">{asset.label}</span>
+                          <Maximize2 className="h-3.5 w-3.5 text-zinc-500 opacity-0 transition group-hover:opacity-100" />
+                        </span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div className="text-2xl font-extrabold text-zinc-100">
+                        {assets?.[asset.id]
+                          ? formatPrice(asset.price, asset.displayDecimals)
+                          : "--"}
+                      </div>
+                      <div
+                        className={`text-sm font-semibold ${isPositive ? "text-emerald-300" : "text-red-300"}`}
+                      >
+                        {formatChange(asset.change)} (24h)
+                      </div>
+                      <div className="h-20 w-full">
+                        <Line
+                          data={asset.chartData}
+                          options={{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            animation: false,
+                            plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                            scales: { x: { display: false }, y: { display: false } },
+                            elements: { line: { capBezierPoints: true } },
+                          }}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </CardItem>
               );
             })}
           </div>
-        </div>
+        </CardGroup>
       </section>
 
       {/* ── Interactive Chart Modal ── */}
